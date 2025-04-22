@@ -5,7 +5,7 @@
 1. [Урок 1: Настройка окружения и базовый класс](./lessons/lesson_01.md)
    - Установка компилятора (g++), Git, CMake
    - Создание структуры проекта
-   - Реализация базового класса `S21Matrix`
+   - Реализация базового класса `E42Matrix`
    - Написание первых тестов (GTest)
 
 2. [Урок 2: Accessors, Mutators и простые операции](./lessons/lesson_02.md)
@@ -47,10 +47,10 @@
     - Проверка стиля Google Style
 
 ## Структура проекта
-s21_matrix_project/
+E42_matrix_project/
 ├── src/
-│   ├── s21_matrix_oop.h
-│   └── s21_matrix_oop.cc
+│   ├── E42_matrix_oop.h
+│   └── E42_matrix_oop.cc
 ├── tests/
 │   ├── CMakeLists.txt
 │   └── test_matrix.cc
@@ -70,7 +70,7 @@ s21_matrix_project/
 
 ## Начало работы
 ```bash
-git clone https://github.com/yourname/s21_matrix_project
-cd s21_matrix_project
+git clone https://github.com/yourname/E42_matrix_project
+cd E42_matrix_project
 make all  # Сборка проекта
 ```
