@@ -3,7 +3,7 @@
 ---
 
 ## **Урок 1: Настройка окружения и базовый класс**  
-**Цель**: Создать основу для работы с матрицами — настроить окружение, реализовать класс `S21Matrix` с конструкторами и деструктором, написать первые тесты.  
+**Цель**: Создать основу для работы с матрицами — настроить окружение, реализовать класс `E42Matrix` с конструкторами и деструктором, написать первые тесты.  
 
 ### **1. Установка инструментов**  
 **Зачем?** Без этих инструментов невозможно компилировать и тестировать код.  
@@ -34,57 +34,57 @@
 **Зачем?** Чтобы код был организован, а не в одной куче.  
 **Создайте папки и файлы**:  
 ```bash
-mkdir -p s21_matrix_oop/{src,tests}  # Основные папки
-cd s21_matrix_oop
-touch src/s21_matrix_oop.h src/s21_matrix_oop.cc  # Класс матрицы
+mkdir -p E42_matrix_oop/{src,tests}  # Основные папки
+cd E42_matrix_oop
+touch src/E42_matrix_oop.h src/E42_matrix_oop.cc  # Класс матрицы
 touch tests/test_matrix.cc           # Тесты
 touch Makefile                      # Для сборки
 ```
 
 ---
 
-### **3. Реализация класса `S21Matrix`**  
+### **3. Реализация класса `E42Matrix`**  
 **Зачем?** Это основа всей библиотеки. Начнём с конструкторов и деструктора.  
 
 #### **Задание**:  
-В файле `src/s21_matrix_oop.h` объявите класс:  
+В файле `src/E42_matrix_oop.h` объявите класс:  
 ```cpp
-#ifndef S21_MATRIX_OOP_H
-#define S21_MATRIX_OOP_H
+#ifndef E42_MATRIX_OOP_H
+#define E42_MATRIX_OOP_H
 
-class S21Matrix {
+class E42Matrix {
  private:
   int rows_, cols_;   // Количество строк и столбцов
   double** matrix_;   // Указатель на двумерный массив
 
  public:
-  S21Matrix();                          // Базовый конструктор (например, 1x1)
-  S21Matrix(int rows, int cols);        // Параметризированный конструктор
-  S21Matrix(const S21Matrix& other);    // Конструктор копирования
-  S21Matrix(S21Matrix&& other);         // Конструктор перемещения
-  ~S21Matrix();                         // Деструктор
+  E42Matrix();                          // Базовый конструктор (например, 1x1)
+  E42Matrix(int rows, int cols);        // Параметризированный конструктор
+  E42Matrix(const E42Matrix& other);    // Конструктор копирования
+  E42Matrix(E42Matrix&& other);         // Конструктор перемещения
+  ~E42Matrix();                         // Деструктор
 
   // Дополнительные методы (для тестов)
   int GetRows() const { return rows_; }  // Accessor для строк
   int GetCols() const { return cols_; }  // Accessor для столбцов
 };
 
-#endif  // S21_MATRIX_OOP_H
+#endif  // E42_MATRIX_OOP_H
 ```
 
-В файле `src/s21_matrix_oop.cc` реализуйте методы:  
+В файле `src/E42_matrix_oop.cc` реализуйте методы:  
 ```cpp
-#include "s21_matrix_oop.h"
+#include "E42_matrix_oop.h"
 #include <iostream>
 
 // Базовый конструктор (создаёт матрицу 1x1 с нулями)
-S21Matrix::S21Matrix() : rows_(1), cols_(1) {
+E42Matrix::E42Matrix() : rows_(1), cols_(1) {
   matrix_ = new double*[rows_];
   matrix_[0] = new double[cols_]{0};
 }
 
 // Параметризированный конструктор (создаёт rows x cols)
-S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
+E42Matrix::E42Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
   if (rows < 1 || cols < 1) throw std::invalid_argument("Invalid matrix size");
   matrix_ = new double*[rows_];
   for (int i = 0; i < rows_; i++) {
@@ -93,7 +93,7 @@ S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
 }
 
 // Конструктор копирования
-S21Matrix::S21Matrix(const S21Matrix& other) : rows_(other.rows_), cols_(other.cols_) {
+E42Matrix::E42Matrix(const E42Matrix& other) : rows_(other.rows_), cols_(other.cols_) {
   matrix_ = new double*[rows_];
   for (int i = 0; i < rows_; i++) {
     matrix_[i] = new double[cols_];
@@ -104,7 +104,7 @@ S21Matrix::S21Matrix(const S21Matrix& other) : rows_(other.rows_), cols_(other.c
 }
 
 // Конструктор перемещения (перенимает ресурсы)
-S21Matrix::S21Matrix(S21Matrix&& other) noexcept 
+E42Matrix::E42Matrix(E42Matrix&& other) noexcept 
     : rows_(other.rows_), cols_(other.cols_), matrix_(other.matrix_) {
   other.matrix_ = nullptr;  // Чтобы деструктор other не удалил данные
   other.rows_ = 0;
@@ -112,7 +112,7 @@ S21Matrix::S21Matrix(S21Matrix&& other) noexcept
 }
 
 // Деструктор (освобождает память)
-S21Matrix::~S21Matrix() {
+E42Matrix::~E42Matrix() {
   if (matrix_) {
     for (int i = 0; i < rows_; i++) {
       delete[] matrix_[i];
@@ -131,30 +131,30 @@ S21Matrix::~S21Matrix() {
 В файле `tests/test_matrix.cc` напишите тесты:  
 ```cpp
 #include <gtest/gtest.h>
-#include "../src/s21_matrix_oop.h"
+#include "../src/E42_matrix_oop.h"
 
 TEST(MatrixTest, DefaultConstructor) {
-  S21Matrix matrix;
+  E42Matrix matrix;
   EXPECT_EQ(matrix.GetRows(), 1);
   EXPECT_EQ(matrix.GetCols(), 1);
 }
 
 TEST(MatrixTest, ParameterizedConstructor) {
-  S21Matrix matrix(3, 4);
+  E42Matrix matrix(3, 4);
   EXPECT_EQ(matrix.GetRows(), 3);
   EXPECT_EQ(matrix.GetCols(), 4);
 }
 
 TEST(MatrixTest, CopyConstructor) {
-  S21Matrix matrix1(2, 2);
-  S21Matrix matrix2(matrix1);  // Копирование
+  E42Matrix matrix1(2, 2);
+  E42Matrix matrix2(matrix1);  // Копирование
   EXPECT_EQ(matrix2.GetRows(), 2);
   EXPECT_EQ(matrix2.GetCols(), 2);
 }
 
 TEST(MatrixTest, MoveConstructor) {
-  S21Matrix matrix1(2, 2);
-  S21Matrix matrix2(std::move(matrix1));  // Перемещение
+  E42Matrix matrix1(2, 2);
+  E42Matrix matrix2(std::move(matrix1));  // Перемещение
   EXPECT_EQ(matrix2.GetRows(), 2);
   EXPECT_EQ(matrix2.GetCols(), 2);
   EXPECT_EQ(matrix1.GetRows(), 0);  // Проверка, что matrix1 "опустошён"
@@ -167,7 +167,7 @@ TEST(MatrixTest, MoveConstructor) {
 **Что тестируем**:  
 1. **Конструкторы**:  
    - Создают матрицу нужного размера.  
-   - Выбрасывают исключение при некорректных размерах (например, `S21Matrix(-1, 5)`).  
+   - Выбрасывают исключение при некорректных размерах (например, `E42Matrix(-1, 5)`).  
 2. **Деструктор**:  
    - Корректно освобождает память (проверить через Valgrind).  
 3. **Копирование и перемещение**:  
@@ -177,7 +177,7 @@ TEST(MatrixTest, MoveConstructor) {
 **Пример ошибки**:  
 ```cpp
 TEST(MatrixTest, InvalidSize) {
-  EXPECT_THROW(S21Matrix matrix(0, 5), std::invalid_argument);
+  EXPECT_THROW(E42Matrix matrix(0, 5), std::invalid_argument);
 }
 ```
 
@@ -185,7 +185,7 @@ TEST(MatrixTest, InvalidSize) {
 
 ### **6. Итог урока**  
 **Что должно получиться**:  
-- Рабочий класс `S21Matrix` с конструкторами и деструктором.  
+- Рабочий класс `E42Matrix` с конструкторами и деструктором.  
 - Простые тесты, проверяющие создание и удаление матриц.  
 - Готовое окружение для дальнейшей работы.  
 
