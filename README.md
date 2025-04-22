@@ -1,6 +1,3 @@
-Вот готовое оглавление для `README.md` с гиперссылками на файлы уроков в формате Markdown:
-
-```markdown
 # Учебный курс по C++: Реализация матричной библиотеки
 
 ## Оглавление уроков
@@ -50,7 +47,6 @@
     - Проверка стиля Google Style
 
 ## Структура проекта
-```
 s21_matrix_project/
 ├── src/
 │   ├── s21_matrix_oop.h
@@ -64,7 +60,6 @@ s21_matrix_project/
 │   └── ...
 ├── Makefile
 └── README.md
-```
 
 ## Рекомендуемые инструменты
 - **Компилятор**: g++ (C++17)
@@ -78,5 +73,4 @@ s21_matrix_project/
 git clone https://github.com/yourname/s21_matrix_project
 cd s21_matrix_project
 make all  # Сборка проекта
-```
 ```
