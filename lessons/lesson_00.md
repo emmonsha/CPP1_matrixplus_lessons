@@ -48,16 +48,29 @@ int main(int argc, char** argv) {
 }
 ```
 
-Компиляция и запуск:  
+Компиляция и запуск:
+Создайте папку tests войдите в нее и создайте файл
 ```bash
+mkdir -p tests && cd tests 
+nano Makefile
+```
+добавьте в Makefile:
+```bash
+test:
 g++ -std=c++17 test_hello.cc -lgtest -lgtest_main -pthread -o test
 ./test
+```
+
+Запустите тест командой 
+```bash
+make test
 ```
 
 **Ожидаемый вывод**:  
 ```
 [ OK ] HelloTest.Basic (0 ms)
 ```
+
 
 ---
 
