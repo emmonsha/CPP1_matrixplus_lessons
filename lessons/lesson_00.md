@@ -67,11 +67,36 @@ make test
 ```
 
 **Ожидаемый вывод**:  
+```bash
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from HelloTest
+[ RUN      ] HelloTest.Basic
+[       OK ] HelloTest.Basic (0 ms)
+[----------] 1 test from HelloTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
 ```
-[ OK ] HelloTest.Basic (0 ms)
+возможны проблемы с установкой библиотеки и не работающими флагами -lgtest
+тогда можно найти путь к библиотеке командой pkg-config --cflags gtest и 
+и указать их непосредственно в строке компиляции
+в  моем случае это выглядело так:
+
+```bash
+CFLAGS=-I/opt/homebrew/Cellar/googletest/1.16.0/include \
+		-L/opt/homebrew/Cellar/googletest/1.16.0/lib
+
+test:
+	@echo $(CFLAGS)
+	@g++ -std=c++17 test_hello.cc $(CFLAGS) -lgtest -lgtest_main -pthread -o test
+	@./test
+
+.PHONY: test
 ```
 
-
+если никак не получилоаь
 ---
 
 ## **2. Интеграция с IDE**  
